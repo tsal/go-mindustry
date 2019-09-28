@@ -1,7 +1,6 @@
 name: Go
 on: [push]
 jobs:
-
   build:
     name: Build
     runs-on: ubuntu-latest
@@ -12,6 +11,9 @@ jobs:
       with:
         go-version: 1.12
       id: go
+      env:
+        # Set a GOPATH at install and it will come out the other end
+        GOPATH: /home/runner/work/go-mindustry/go
 
     - name: Check out code into the Go module directory
       uses: actions/checkout@v1
@@ -19,9 +21,14 @@ jobs:
     - name: Get dependencies
       run: |
         go get -v -t -d ./...
+
     - name: Lint
       run: |
-        go get -u golang.org/x/lint/golint
+        go install golang.org/x/lint/golint
+        export PATH=$PATH:/home/runner/work/go-mindustry/go/bin
         for i in pkg/*; do golint $i/; done
+
+    - name: Test
+      run: go test -v ./...
     - name: Build
-      run: go build -v .
+      run: echo - skipping build - nothing to build yet - go build -v .
