@@ -23,6 +23,10 @@ jobs:
 
     - name: Lint
       run: |
+        pwd
+        echo $GOPATH
+        echo $GOROOT
+        ls $GOROOT
         export PATH=$PATH:/home/runner/work/go-mindustry/go/bin
         for i in pkg/*; do golint $i/; done
 
