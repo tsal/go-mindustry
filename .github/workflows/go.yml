@@ -28,6 +28,10 @@ jobs:
         export PATH=$PATH:/home/runner/work/go-mindustry/go/bin
         for i in pkg/*; do golint $i/; done
 
+    - if: failure()
+      run: |
+        echo Lint failed, attempting to continue with build
+
     - name: Test
       run: go test -v ./...
     - name: Build
