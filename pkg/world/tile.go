@@ -16,11 +16,17 @@ type TileEntity struct{}
 type Tile struct {
 	*Position
 	*TargetTrait
+	entity                *tileEntity
 	Cost                  byte
 	Entity                TileEntity
 	X, Y                  int32
 	block, floor, overlay byte // placeholder types
 	rotation, team        byte
+}
+
+func (tile *Tile) getTeam() int {
+	// TODO: implement
+	return 0
 }
 
 func New(x, y int) (T Tile) {
@@ -34,3 +40,5 @@ func New(x, y int) (T Tile) {
 
 	return
 }
+
+type tileEntity struct{}
