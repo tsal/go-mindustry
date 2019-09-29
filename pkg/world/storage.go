@@ -44,5 +44,5 @@ func (b BlockStorage) getMaximumAccepted(tile Tile, item Item) int {
 
 func (BlockStorage) acceptItem(item Item, tile Tile, source Tile) bool {
 	// TODO: implement Consumer type
-
+	return true
 }
