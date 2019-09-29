@@ -28,11 +28,13 @@ jobs:
         export PATH=$PATH:/home/runner/work/go-mindustry/go/bin
         for i in pkg/*; do golint $i/; done
 
+    # Attempt to run tests even if linting fails
     - if: failure()
       run: |
-        echo Lint failed, attempting to continue with build
+        true
 
     - name: Test
       run: go test -v ./...
+
     - name: Build
       run: echo - skipping build - nothing to build yet - go build -v .
