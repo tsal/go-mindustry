@@ -27,3 +27,9 @@ type Content interface {
 	Load()
 	fmt.Stringer
 }
+
+type MappableContent interface {
+	Content
+	Name() string
+	SetName(string)
+}

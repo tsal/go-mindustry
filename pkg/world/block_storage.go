@@ -7,7 +7,7 @@ import (
 )
 
 type BlockStorage struct {
-	*game.UnlockableContent
+	game.UnlockableContent
 	hasItems, hasLiquids, hasPower bool
 	OutputsLiquid                  bool
 	ConsumesPower                  bool
