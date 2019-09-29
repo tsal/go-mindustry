@@ -5,6 +5,13 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
+    - name: Debug Information
+      env:
+        GITHUB_CONTEXT: ${{ toJson(github) }}
+        JOB_CONTEXT: ${{ toJson(job) }}
+      run: |
+        echo "$GITHUB_CONTEXT"
+        echo "$JOB_CONTEXT"
 
     - name: Set up Go 1.12
       uses: actions/setup-go@v1
@@ -27,8 +34,15 @@ jobs:
         go install golang.org/x/lint/golint
         export PATH=$PATH:/home/runner/work/go-mindustry/go/bin
         for i in pkg/*; do golint $i/; done
+      keepgoing: true
 
     - name: Test
       run: go test -v ./...
+
     - name: Build
       run: echo - skipping build - nothing to build yet - go build -v .
+
+    - name: Debug Tail
+      env:
+        STEPS_CONTEXT: ${{ toJson(steps) }}
+      run: echo "$STEPS_CONTEXT"
